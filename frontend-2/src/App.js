@@ -6,11 +6,14 @@ import Keycloak from "keycloak-js";
 
 import Home from "./page/Home";
 import {getCookie, setCookie} from "./utils/cookie";
+import { api } from "./api";
 
 function App() {
   const keycloak = Keycloak("/keycloak.json");
 
   const handleReceivingTokens = (tokens) => {
+    api.defaults.headers.common.Authorization = `Bearer ${tokens.token}`;
+
     setCookie("accessToken", tokens.token);
     setCookie("refreshToken", tokens.refreshToken);
   };
@@ -27,10 +30,10 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <h1>NOT FOUND</h1>
-            <Link  to="/app2">go app2</Link>
+            <h1>NOT FOUND that url</h1>
+            <Link to="/dev">go Home</Link>
           </Route>
-          <Route exact path="/app2">
+          <Route exact path="/dev">
             <Home />
           </Route>
         </Switch>

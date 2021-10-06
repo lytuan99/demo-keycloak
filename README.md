@@ -71,6 +71,12 @@ app.post("/animals", keycloak.enforcer(["animals:post"]), async (req, res) => {
 ```
 Các endpoint khi được một user hoặc client khác request vào tài nguyên thành công sẽ được lưu cache lại thông tin vừa request để những request tương tự không cần phải gửi lên keycloak server để  định giá permission.
 
+## Các project demo
+
+- **frontend-1, frontend-2**: demo kết nối keycloak với react app.
+- **service-1**: demo kết nối service và bảo vệ các endpoint sử dụng thư viện của keycloak.
+- **service-2**: demo `service-1` gọi chéo tới.
+
 
 
 

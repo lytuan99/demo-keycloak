@@ -5,6 +5,18 @@ export const api = axios.create({
   responseType: "json",
 });
 
+export const getMe = async () => {
+  try {
+    const res = await api({
+      method: "GET",
+      url: "/me",
+    });
+    return res;
+  } catch (error) {
+    return error.response;
+  }
+};
+
 export const getAnimals = async (verifyType) => {
   try {
     const res = await api({

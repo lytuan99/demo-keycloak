@@ -1,8 +1,8 @@
 {
-  "realm": "myRealm",
-  "auth-server-url": "http://localhost:8080/auth/",
+  "realm": "vbee-holding",
+  "auth-server-url": "https://accounts.iristech.club/auth/",
   "ssl-required": "none",
-  "resource": "app1",
+  "resource": "dcm-frontend",
   "public-client": true,
   "confidential-port": 0
 }

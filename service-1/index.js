@@ -33,7 +33,9 @@ app.use(keycloak.middleware({logout: '/none', admin: '/none'}));
 // });
 
 app.get("/animals", keycloak.enforcer(["animals:get"]), async (req, res) => {
-  console.log('success verify: ', req.accessTokenContent);
+  // console.log('success verify: ', req.accessTokenContent);
+  const t = req.kauth.grant.access_token.content;
+  console.log('token nef: ', t);
 
   const { verifyType } = req.query;
   const animals = ["cat", "dog", "fish"];
@@ -48,6 +50,10 @@ app.get("/animals", keycloak.enforcer(["animals:get"]), async (req, res) => {
     animals.push(data);
   } catch (error) {}
   res.send({status: 1, result: animals});
+});
+
+app.get("/me", keycloak.protect(["user"]), async (req, res) => {
+  res.send({status: 1, result: {name: 'Tuan', age: '22'}});
 });
 
 app.post("/animals", keycloak.enforcer(["animals:post"]), async (req, res) => {

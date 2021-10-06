@@ -8,6 +8,11 @@ const Home = () => {
   const {keycloak} = useKeycloak();
   const [animals, setAnimals] = useState([]);
 
+  const handleGetMe = async () => {
+    const { data } = await api.getMe();
+    console.log('get Me: ', data.result);
+  }
+
   const handleLogin = async () => {
     const loggedIn = await keycloak.login({
       redirectUri: "http://localhost:3000/app1",
@@ -77,6 +82,7 @@ const Home = () => {
         {keycloak.authenticated && (
           <>
             <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleGetMe}>getMe</button>
             <button onClick={() => handleGetAnimals("protect")}>
               GET animals with PROTECT
             </button>

@@ -2,7 +2,7 @@
   "realm": "myRealm",
   "auth-server-url": "http://localhost:8080/auth/",
   "ssl-required": "external",
-  "resource": "app1",
+  "resource": "frontend-1",
   "public-client": true,
   "confidential-port": 0
 }
