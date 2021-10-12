@@ -2,7 +2,7 @@
   "realm": "vbee-holding",
   "auth-server-url": "https://accounts.iristech.club/auth/",
   "ssl-required": "none",
-  "resource": "dcm-frontend",
+  "resource": "dcm-admin-frontend",
   "public-client": true,
   "confidential-port": 0
 }

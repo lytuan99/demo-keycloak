@@ -70,11 +70,17 @@ const Home = () => {
 
   const handleProfile = () => {
     keycloak.accountManagement();
+    
   };
 
+  const loadUserInfo = async () => {
+    const data = await keycloak.loadUserProfile();
+    console.log('user ', data);
+  }
+
   return (
-    <div className="App" style={{padding: "10vh 40%"}}>
-      <div style={{display: "flex", gap: "20px"}}>
+    <div className="App" style={{padding: "10vh 20%"}}>
+      <div style={{display: "flex", gap: "20px", flexWrap: 'wrap'}}>
         {!keycloak.authenticated && (
           <button onClick={handleLogin}>Login</button>
         )}
@@ -99,7 +105,8 @@ const Home = () => {
               DELETE Animals
             </button>
 
-            <button onClick={handleProfile}>Profile</button>
+            <button onClick={handleProfile}>go To profile</button>
+            <button onClick={loadUserInfo}>get user info</button>
           </>
         )}
       </div>
@@ -107,6 +114,7 @@ const Home = () => {
       <div style={{display: "flex", gap: "20px"}}>
         {animals && animals.map((animal) => <h3 key={animal}>{animal}</h3>)}
       </div>
+      <div style={{ marginTop: '50px', width: '350px'}}>accessToken: {keycloak && JSON.stringify(keycloak.tokenParsed)}</div>
     </div>
   );
 };

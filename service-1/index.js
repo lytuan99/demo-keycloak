@@ -32,10 +32,11 @@ app.use(keycloak.middleware({logout: '/none', admin: '/none'}));
 //   res.send({status: 1, result: ["cat", "dog", "fish"]});
 // });
 
-app.get("/animals", keycloak.enforcer(["animals:get"]), async (req, res) => {
+app.get("/animals", keycloak.enforcer(["animals:get"], { response_mode: "token"}), async (req, res) => {
   // console.log('success verify: ', req.accessTokenContent);
-  const t = req.kauth.grant.access_token.content;
-  console.log('token nef: ', t);
+  // const t = req.kauth.grant.access_token.content;
+  // console.log('token nef: ', t);
+  console.log("user info: ", req.kauth.grant.access_token.content);
 
   const { verifyType } = req.query;
   const animals = ["cat", "dog", "fish"];
@@ -52,11 +53,13 @@ app.get("/animals", keycloak.enforcer(["animals:get"]), async (req, res) => {
   res.send({status: 1, result: animals});
 });
 
-app.get("/me", keycloak.protect(["user"]), async (req, res) => {
+app.get("/me", keycloak.protect(["service1:admin", "hihi"]), async (req, res) => {
+  // console.log("user info: ", req.kauth.grant.access_token.content);
   res.send({status: 1, result: {name: 'Tuan', age: '22'}});
 });
 
 app.post("/animals", keycloak.enforcer(["animals:post"]), async (req, res) => {
+  console.log("user info: ", req.kauth.grant.access_token.content);
   const animals = ["post cat", "post dog", "post fish"];
   res.send({status: 1, result: animals});
 });
@@ -93,6 +96,12 @@ app.post("/", (req, res) => {
   console.log("even admin here");
   res.status(200).send("ok");
 });
+
+app.post("/events", (req, res) => {
+  console.log('==========: ', req.body);
+
+  res.status(200).send({status: 1, message: "xin chao java application"});
+})
 
 const server = http.createServer(app);
 

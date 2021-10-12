@@ -1,31 +1,27 @@
 const Keycloak = require("keycloak-connect-cache");
 
 const keycloakConfig = {
-  realm: "myRealm",
+  "realm": "myRealm",
   "auth-server-url": "http://localhost:8080/auth/",
-  "ssl-required": "none",
-  resource: "service1",
+  "ssl-required": "external",
+  "resource": "service1",
   "verify-token-audience": true,
-  credentials: {
-    secret: "4b45de4b-e45b-4807-b717-8fa5c66e0d4e",
+  "credentials": {
+    "secret": "4b45de4b-e45b-4807-b717-8fa5c66e0d4e"
   },
+  "use-resource-role-mappings": true,
   "confidential-port": 0,
-  "policy-enforcer": {
-    "path-cache": {
-      lifespan: 300,
-      "max-entries": 1000,
-    },
-  },
-};
+  "policy-enforcer": {}
+}
 
 // const keycloakConfig = {
 //   "realm": "vbee-holding",
 //   "auth-server-url": "https://accounts.iristech.club/auth/",
 //   "ssl-required": "none",
-//   "resource": "dcm-backend",
+//   "resource": "dcm-admin-base",
 //   "verify-token-audience": true,
 //   "credentials": {
-//     "secret": "81b05990-0c8d-4b03-a393-3c4f644a7320"
+//     "secret": "3f15b88e-e7a0-4f6f-8dee-e096aef95947"
 //   },
 //   "confidential-port": 0,
 //   "policy-enforcer": {}
